@@ -1,3 +1,6 @@
+% Функция построения гистограммы выборки
+% Выборка формируется созданным генератором erlang_rand(3, 4)
+
 function Y = create_hist_quants(show_stat_interior, show_stat_graph)
     quants = zeros(1, 10);
     values = [];
@@ -33,7 +36,8 @@ function Y = create_hist_quants(show_stat_interior, show_stat_graph)
         end
 
         if (show_stat_interior)
-            disp(['Выборочное среднее ', num2str(mean(values)), '; Выборочная дисперсия ', num2str(var(values))])
+            disp(['Выборочное среднее ', num2str(mean(values)), ...
+                '; Выборочная дисперсия ', num2str(var(values))])
         end
         if (show_stat_graph)
             mean_values = [mean_values, mean(values)];
@@ -44,19 +48,26 @@ function Y = create_hist_quants(show_stat_interior, show_stat_graph)
 
     total = numel(values);
     disp(['Сгенерировано значений: ', num2str(total)]);
-    disp(['Выборочное среднее ', num2str(mean(values)), '; Выборочная дисперсия ', num2str(var(values))])
+    disp(['Выборочное среднее ', num2str(mean(values)), ...
+        '; Выборочная дисперсия ', num2str(var(values))])
 
     if (show_stat_graph)
         real_mean = 3/4; % k/l
         real_disp = 3/16; % k/l^2
-        
+
         subplot(1,2,1);
         plot(mean_values);
         yline(real_mean);
+        legend('Оценка по выборке','Теоретическое значение')
+        xlabel('Объём выборки');
+        ylabel('Мат. ожидание');
 
         subplot(1,2,2);
         plot(disp_values);
         yline(real_disp);
+        legend('Оценка по выборке','Теоретическое значение')
+        xlabel('Объём выборки');
+        ylabel('Дисперсия');
     end
 
     Y = quants;
