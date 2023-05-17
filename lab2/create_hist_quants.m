@@ -1,4 +1,4 @@
-% Функция построения гистограммы выборки
+% Функция построения квантов выборки
 % Выборка формируется созданным генератором erlang_rand(3, 4)
 
 function Y = create_hist_quants(show_stat_interior, show_stat_graph)
@@ -54,7 +54,8 @@ function Y = create_hist_quants(show_stat_interior, show_stat_graph)
     if (show_stat_graph)
         real_mean = 3/4; % k/l
         real_disp = 3/16; % k/l^2
-
+        
+        figure(2);
         subplot(1,2,1);
         plot(mean_values);
         yline(real_mean);

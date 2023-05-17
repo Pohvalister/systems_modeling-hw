@@ -8,9 +8,11 @@ function lab2
         y = 32 .* x .^ 2 .* exp(-4 .* x);
     end
     x = linspace(0,3);
-    %plot(x, erlang_func(x));
+    figure(1);
+    plot(x, erlang_func(x));
     
     % Генерация данных для гистограммы
     hist_values = create_hist_quants(false, true)
-    %bar(hist_values);
+    figure(3);
+    bar(hist_values);
 end
