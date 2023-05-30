@@ -2,7 +2,9 @@
 % Математическое моделирование
 
 function lab4
-    %   Параметры ШИМ сигнала
+    %   ЭТАП 1 - Задание ШИМ сигнала
+
+    %   Параметры Вариант 8
     function tau = imp_duration(t) % Функция длительностей импульсов
         tau_0 = 25; % Начальная длительность импульса
         tau = t / 16 + tau_0;
@@ -13,8 +15,7 @@ function lab4
 
     A = 10; % Амплитуда колебаний
     nk = 32; % число гармонирующих составляющих
-
-    %   ЭТАП 1 - Задание ШИМ сигнала
+    
     times = 0:(kp*T);
     signal = zeros(1, T*kp + 1);
     for time = times
@@ -39,20 +40,26 @@ function lab4
     figure(1)
     subplot(4, 2, 1)
     plot(times, imp_duration(times)); % Изменение импульсов
+    title('Изменение длительности импульсов')
     subplot(4, 2, 3)
     plot(times, signal); % Моделирующая функция
+    title('Моделирующая функция')
     subplot(4, 2, 4)
     fun_diag = abs(fft(signal));
 
     plot(fun_diag(1:(kp*T)/2)); % Спектральная диаграмма моделирующей функции
+    title('Спектральная диаграмма моделирующей функции')
 
     subplot(4, 2, 5)
     plot(times, Un); % ВЧ колебания
+    title('ВЧ колебания')
     subplot(4, 2, 7)
     plot(times, Urez); % Радиосигнал с ШИМ
+    title('Радиосигнал с ШИМ')
     subplot(4, 2, 8)
     diag = abs(fft(Urez));
     plot(diag(1:(kp*T)/2)); % Спектр радиосигнала
+    title('Спектральная диаграмма радиосигнала')
 
 
     %   ЭТАП 2 - Обфускация сигнала
@@ -122,25 +129,36 @@ function lab4
     figure(2)
     subplot(5, 2, 1)
     plot(times, Upom); % Помехи
+    title('Помехи')
     subplot(5, 2, 3)
     plot(times, Ukr); % Входная функция
+    title('Входной сигнал')
     subplot(5, 2, 4)
     plot(abs(input_frecs(1:(kp*T)/2))); % Частоты на входе
+    title('Частоты на входе')
 
     subplot(5, 2, 6)
     plot(abs(filter1_frecs(1:(kp*T)/2))); % Частоты после фильтра 1
+    title('Частоты после ВЧ фильтра')
     subplot(5, 2, 5)
     plot(times, Uk2); % Сигнал после фильтра 1
+    title('Сигнал после ВЧ фильтра')
 
     subplot(5, 2, 7)
     plot(times, Ud); % Сигнал после фильтра 2
+    title('Сигнал после Усилителя')
+
     subplot(5, 2, 8)
     plot(abs(Ud_frecs(1:(kp*T)/2))); % Частоты после фильтра 2
+    title('Частоты после Усилителя')
 
     subplot(5, 2, 10)
     plot(abs(Ufiltered_frecs(1:(kp*T)/2))); % Частоты после фильтра 3
+    title('Частоты после НЧ фильтра')
+
     subplot(5, 2, 9)
     plot(times, Ufiltered); % Сигнал после фильтра 3
+    title('Сигнал после НЧ фильтра')
     
     figure(3)
     plot(times, Udet); % Спектральная диаграмма моделирующей функции
